@@ -41,12 +41,12 @@ public class PaymentServiceImpl implements PaymentService {
         String updateMode = mode.toUpperCase();
         payment.setPaymentCompleted(false);
 
-        if(updateMode.equals(CASH))
-            payment.setPaymentMode(CASH);
-        else if(updateMode.equals(CARD))
-            payment.setPaymentMode(CARD);
-        else if(updateMode.equals(UPI))
-            payment.setPaymentMode(UPI);
+        if(updateMode.equals("CASH"))
+            payment.setPaymentMode(PaymentMode.CASH);
+        else if(updateMode.equals("CARD"))
+            payment.setPaymentMode(PaymentMode.CARD);
+        else if(updateMode.equals("UPI"))
+            payment.setPaymentMode(PaymentMode.UPI);
         else
             throw new Exception("Payment mode not detected");
 
