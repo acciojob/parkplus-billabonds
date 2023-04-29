@@ -100,7 +100,7 @@ public class ReservationServiceImpl implements ReservationService {
         // User
         List<Reservation> reservations = user.getReservationList();
         reservations.add(reservation);
-        user.setReservationList(reservations);
+        user.setReservationList(reservationList);                   // change
 
         userRepository3.save(user);
 
