@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "users")
+@Table(name = "user")
 public class User {
 
     @Id
@@ -21,10 +21,20 @@ public class User {
 
     private String password;
 
-    @OneToMany(mappedBy = "users",cascade = CascadeType.ALL)
-    List<Reservation> reservationList;
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    List<Reservation> reservationList = new ArrayList<>();
 
 
+    public User() {
+    }
+
+    public User(int id, String name, String phoneNumber, String password, List<Reservation> reservationList) {
+        this.id = id;
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.password = password;
+        this.reservationList = reservationList;
+    }
 
     public int getId() {
         return id;

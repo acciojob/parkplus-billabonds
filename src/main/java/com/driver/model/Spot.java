@@ -16,20 +16,31 @@ public class Spot {
     private int id;
 
     @Enumerated(EnumType.STRING)
-    SpotType spotType;
+    private SpotType spotType;
 
     private int pricePerHour;
 
-    private boolean occupied;
+    private Boolean occupied;
 
     @ManyToOne
     @JoinColumn
     ParkingLot parkingLot;
 
     @OneToMany(mappedBy = "spot",cascade = CascadeType.ALL)
-    List<Reservation> reservationList ;
+    List<Reservation> reservationList = new ArrayList<>();
 
 
+    public Spot() {
+    }
+
+    public Spot(int id, SpotType spotType, int pricePerHour, boolean occupied, ParkingLot parkingLot, List<Reservation> reservationList) {
+        this.id = id;
+        this.spotType = spotType;
+        this.pricePerHour = pricePerHour;
+        this.occupied = occupied;
+        this.parkingLot = parkingLot;
+        this.reservationList = reservationList;
+    }
 
     public int getId() {
         return id;
