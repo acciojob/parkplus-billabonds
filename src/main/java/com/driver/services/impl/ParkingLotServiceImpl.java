@@ -32,7 +32,6 @@ public class ParkingLotServiceImpl implements ParkingLotService {
         //add a new parking lot to the database
 
         ParkingLot parkingLot = new ParkingLot();
-
         parkingLot.setName(name);
         parkingLot.setAddress(address);
 //        parkingLot.setSpotList(new ArrayList<>());
@@ -67,7 +66,7 @@ public class ParkingLotServiceImpl implements ParkingLotService {
 
         parkingLot.getSpotList().add(spot);
 
-        spotRepository1.save(spot);
+//        spotRepository1.save(spot);
         parkingLotRepository1.save(parkingLot);
 
         return spot;
@@ -92,11 +91,11 @@ public class ParkingLotServiceImpl implements ParkingLotService {
 //        List<Spot> newSpotList = new ArrayList<>();
         Spot updatedSpot = null;
 
-        for(Spot spot: spotList)
+        for(Spot st: spotList)
         {
-            if(spot.getId() == spotId) {
-                spot.setPricePerHour(pricePerHour);
-                updatedSpot = spot;
+            if(st.getId() == spotId) {
+                st.setPricePerHour(pricePerHour);
+                updatedSpot = st;
                 break;
             }
         }
