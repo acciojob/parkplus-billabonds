@@ -37,9 +37,7 @@ public class ParkingLotServiceImpl implements ParkingLotService {
         parkingLot.setAddress(address);
         parkingLot.setSpotList(new ArrayList<>());
 
-        parkingLotRepository1.save(parkingLot);
-
-        return parkingLot;
+        return parkingLotRepository1.save(parkingLot);
     }
 
     @Override                                                                               // 2nd API - done
