@@ -35,9 +35,11 @@ public class ParkingLotServiceImpl implements ParkingLotService {
 
         parkingLot.setName(name);
         parkingLot.setAddress(address);
-        parkingLot.setSpotList(new ArrayList<>());
+//        parkingLot.setSpotList(new ArrayList<>());
 
-        return parkingLotRepository1.save(parkingLot);
+        parkingLotRepository1.save(parkingLot);
+
+        return parkingLot;
     }
 
     @Override                                                                               // 2nd API - done
@@ -49,9 +51,9 @@ public class ParkingLotServiceImpl implements ParkingLotService {
         Spot spot = new Spot();
 
         // spotType
-        if(numberOfWheels <= 2)
+        if(numberOfWheels >= 0 && numberOfWheels <= 2)
             spot.setSpotType(SpotType.TWO_WHEELER);
-        else if(numberOfWheels <= 4)
+        else if(numberOfWheels >= 3 && numberOfWheels <= 4)
             spot.setSpotType(SpotType.FOUR_WHEELER);
         else
             spot.setSpotType(SpotType.OTHERS);
@@ -63,11 +65,7 @@ public class ParkingLotServiceImpl implements ParkingLotService {
         ParkingLot parkingLot = parkingLotRepository1.findById(parkingLotId).get();
         spot.setParkingLot(parkingLot);
 
-        List<Spot> spotList = parkingLot.getSpotList();
-        spotList.add(spot);
-        parkingLot.setSpotList(spotList);
-
-        spot.setReservationList(new ArrayList<>());
+        parkingLot.getSpotList().add(spot);
 
         spotRepository1.save(spot);
         parkingLotRepository1.save(parkingLot);
@@ -91,24 +89,24 @@ public class ParkingLotServiceImpl implements ParkingLotService {
         ParkingLot parkingLot = parkingLotRepository1.findById(parkingLotId).get();
         List<Spot> spotList = parkingLot.getSpotList();
 
-        List<Spot> newSpotList = new ArrayList<>();
-        Spot changeSpot = null;
+//        List<Spot> newSpotList = new ArrayList<>();
+        Spot updatedSpot = null;
 
         for(Spot spot: spotList)
         {
             if(spot.getId() == spotId) {
                 spot.setPricePerHour(pricePerHour);
-                changeSpot = spotRepository1.save(spot);
+                updatedSpot = spot;
+                break;
             }
-            newSpotList.add(spot);
         }
+        spotRepository1.save(updatedSpot);
+//        changeSpot.setParkingLot(parkingLot);
+//
+//        parkingLot.setSpotList(newSpotList);
+//        parkingLotRepository1.save(parkingLot);
 
-        changeSpot.setParkingLot(parkingLot);
-
-        parkingLot.setSpotList(spotList);
-        parkingLotRepository1.save(parkingLot);
-
-        return changeSpot;
+        return updatedSpot;
     }
 
     @Override                                                                               // 5th API - done
